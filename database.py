@@ -3,12 +3,12 @@ from model import *
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine('sqlite:///cats.db')
+engine = create_engine('sqlite:///users_charities.db')
 Base.metadata.create_all(engine)
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-def create_user():
+def create_user(username, email, password,profile_pic):
 	new_user = User(
 		username = username,
 		email = email,
@@ -20,30 +20,40 @@ def create_user():
 	session.add(new_user)
 	session.commit()
 
-def create_charity():
+def create_charity(name, cause, email, website,pic,short_intro, paragraph):
 	new_charity = Charity(
 		name = name,
 		cause = cause,
 		email = email,
 		website = website,
 		pic = pic,
-		intro = intro
+		short_intro = intro,
+		paragraph = paragraph
 		)
 	session.add(new_charity)
 	session.commit()
 
 
 def update_user():
-	pass
+	session.commit()
 
 def update_charity():
-	pass
+	session.commit()
 
-def delete_user():
+def get_user(username):
+	user = session.query(User).filter_by(username= username).first()
+ 	# print(user)
+	return user
+
+def get_charity(id):
+	charity = session.query(Charity).filter_by(id= id).first()
+	return charity
+
+def delete_user(username):
 	session.query(User).filter_by(username= username).delete()
 	session.commit()
 
-def delete_charity():
+def delete_charity(id):
 	session.query(Charity).filter_by(id= id).delete()
 	session.commit()
 	

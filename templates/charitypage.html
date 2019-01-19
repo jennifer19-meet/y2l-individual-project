@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>About "Insert charity name"</title>
+	<title>About {{ charity.name }}</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
 <body>
-
+<h1> {{ charity.name }}</h1>
+<h2>{{ charity.cause }}</h2>
+<p>{{ charity.paragraph }}</p>
+<h1>Contact Information</h1>
+<p>website: <a href="{{ charity.website }}">{{ charity.website }}</a></p>
+<p>email: {{ charity.email }}</p>
 </body>
 </html>

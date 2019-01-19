@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign in</title>
+</head>
+<body>
+<h1>Log In</h1>
+<p>Don't have an account yet? <a href="{{ url_for('signup') }}">Join Now</a></p>
+<form action="/login" method="POST">
+	<input type="text" name="username" placeholder="Username">
+	<br>
+	<input type="password" name="password" placeholder="Password">
+	<br>
+	<input type="submit" name="Log In">
+	{% if passs == True %}
+		<h3>wrong password!</h3>
+	{% endif %}
+	{% if uuuu == True%}
+		<h3>wrong username! </h3>
+	{% endif %}
+</form>
+</body>
+</html>

@@ -3,15 +3,20 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
 
+
+UPLOAD_FOLDER = '/static/img/profile_pic/<user.id>'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
 Base = declarative_base()
 
 # Write your classes here :
 class User(Base):
-	__tablename__ ="Information about users"
-	username = Column(String, primary_key= True)
+	__tablename__ ="users"
+	id = Column(Integer, primary_key= True)
+	username = Column(String)
 	email = Column(String)
 	password = Column (String)
-	profile_pic = Column (BLOB)
+	profile_pic = Column (String)
 	followers = Column(Integer)
 	following = Column(Integer)
 
@@ -20,11 +25,12 @@ class User(Base):
 
 
 class Charity(Base):
-	__tablename__ ="Information about charities"
+	__tablename__ ="charities"
 	id = Column(Integer, primary_key= True)
 	name = Column(String)
 	cause = Column(String)
 	email = Column(String)
 	website = Column (String)
-	pic = Column (BLOB)
-	intro = Column(String)
+	pic = Column (String)
+	short_intro = Column(String)
+	paragraph = Column(String)

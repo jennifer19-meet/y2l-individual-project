@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>"insert persons username here"</title>
+	<title>{{ user.username }}</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
 <body>
-
+<h1>{{ user.username }}</h1>
+<p>{{ user.email }}</p>
+<br>
+<p>{{ user.password }}</p>
+<br>
+<p>{{ user.followers }}</p>
+<br>
+<p>{{ user.following }}</p>
 </body>
 </html>
