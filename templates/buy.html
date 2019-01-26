@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Charities</title>
+	<title>Buy Now</title>
 	<link rel="stylesheet" type="text/css" href="/static/charity.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -27,17 +27,7 @@
         <li><a href="{{url_for('about')}}">ABOUT</a></li>
       </ul>
     </div>
-    {% if j == None %}
-		<div class="collapse navbar-collapse" id="myNavbar">
-		  <ul class="nav navbar-nav navbar-right">
-			<li><a href="{{url_for('signin')}}">LOGIN</a></li>
-			<li><a href="{{url_for('signup')}}">SIGNUP</a></li>
-		  </ul>
-		</div>
-	{% endif %}
-	{% if j==True %}
-
-		<div id="myNavbar">
+    <div id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ session["username"]}}
@@ -50,17 +40,27 @@
         </li>
       </ul>
     </div>
-	{% endif %}
   </div>
-
 </nav>
 <br>
-{% for charity in charities %}
-	<img src="/static/charity_pic/{{ charity.pic }}" height="350" width="350">
-	<h2 class="name"> <a href="charities/{{ charity.id }}">{{ charity.name }}</a></h2>
-	<h5 class="cause">{{ charity.cause }}</h5>
-	<p class="short_intro">{{ charity.short_intro }}</p>
-{% endfor %}
+<a href="/static/user_images/{{ photo.pic }}" download="jkl"><img src="/static/user_images/{{ photo.pic }}" width="250" height="250"></a>
+<h5 class="profile_name">Seller: <a href="{{ url_for('profile', username = user.username)}}">{{ user.username }}</p></a>
+<p class="profile_email">Price: {{ photo.price }} {{ photo.currency }}s </p>
+<p class="profile_email">{{ photo.percentage }} % of the price goes to charity</p>
 
+<form class="profile_email">
+     <fieldset>
+          <legend>Selecting elements</legend>
+          <p>
+             <label>Charity</label>
+             <select id = "myList">
+             {% for i in charities %}
+               <option >{{ i.name }}</option>
+              {% endfor %}
+             </select>
+          </p>
+       </fieldset>
+</form>
+<p class="profile_email">To get the image please press on the image</p>
 </body>
 </html>

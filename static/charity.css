@@ -1,0 +1,96 @@
+img{
+	margin-left: 15px;
+
+}
+body {
+		font: 20px Montserrat, sans-serif;
+		line-height: 1.8;
+		color: #f5f6f7;
+	}
+.name{
+	margin-left: 370px;
+	margin-top: -330px;
+	margin-bottom: 330px;
+	font-size: 50px;
+	font-weight: bold;
+}
+.cause{
+	margin-left: 370px;
+	margin-top: -300px;
+	margin-bottom: 300px;
+}
+#paragraph{
+	margin-left: 370px;
+	margin-top: -270px;
+	margin-bottom: 270px;
+	overflow: hidden;
+ 	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+#contact{
+	margin-left: 10px;
+	margin-top: -110px;
+	margin-bottom: 110px;
+	font-size: 50px;
+	font-weight: bold;
+}
+.short_intro{
+	margin-left: 370px;
+	margin-top: -270px;
+	margin-bottom: 270px;
+	overflow: hidden;
+ 	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+.navbar {
+		padding-top: 15px;
+		padding-bottom: 15px;
+		border: 0;
+		border-radius: 0;
+		margin-bottom: 0;
+		font-size: 12px;
+		letter-spacing: 5px;
+	}
+.navbar-nav  li a:hover {
+		color: #1abc9c !important;
+	}
+.dropdown-menu li a {
+    color: #000 !important;
+  }
+.dropdown-menu li a:hover {
+    background-color: red !important;
+  }
+
+.topnav .search-container {
+  float: right;
+}
+.profile_name{
+	margin-left: 310px;
+	margin-top: -230px;
+	margin-bottom: 230px;
+	font-size: 50px;
+	font-weight: bold;
+}
+.profile_email{
+	margin-left: 310px;
+	margin-top: -200px;
+	margin-bottom: 200px;
+}
+.user_pics{
+	align-self: 
+}
+.sellers{
+
+}
+.jumbotron {
+    background-color: #f4511e;
+    color: #fff;
+    padding: 100px 25px;
+    font-family: Montserrat, sans-serif;
+  }
+.container-fluid {
+    padding: 60px 50px;
+  }
+

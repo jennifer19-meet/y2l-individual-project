@@ -1,0 +1,83 @@
+body, html {
+  height: 100%;
+  background-repeat:no-repeat;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#login_title{
+  text-align: center;
+}
+
+.j {
+  position: absolute;
+  right :0;
+  margin: 20px;
+  max-width: 350px;
+  padding: 16px;
+  background-color: white;
+  border-radius: 25px;
+}
+.form_div{
+  padding-top: 30px;
+}
+/* Full-width input fields */
+  input[type=text], input[type=password], input[type=email] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+.btn {
+  background-color: #086E87;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+
+.btn2 {
+  background-color: #FF0011;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn2:hover {
+  opacity: 1;
+}
+
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
+.navbar-nav  li a:hover {
+    color: #1abc9c !important;
+  }
+
+
+.topnav .search-container {
+  float: right;
+}

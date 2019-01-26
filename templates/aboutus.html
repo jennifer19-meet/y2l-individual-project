@@ -2,9 +2,66 @@
 <html>
 <head>
 	<title>About Us</title>
-	<link rel="stylesheet" type="text/css" href="static/style.css">
+	<link rel="stylesheet" type="text/css" href="/static/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+<nav class="navbar navbar-default">
+  <div class="container">
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>                        
+	  </button>
 
+	</div>
+	<div id="myNavbar">
+	  <ul class="nav navbar-nav navbar-left">
+		<li><a href="{{url_for('home_page')}}">HOME</a></li>
+		<li><a href="{{url_for('all_charities')}}">CHARITIES</a></li>
+		<li><a href="{{url_for('about')}}">ABOUT</a></li>
+	  </ul>
+	</div>
+	{% if j == None %}
+		<div class="collapse navbar-collapse" id="myNavbar">
+		  <ul class="nav navbar-nav navbar-right">
+			<li><a href="{{url_for('signin')}}">LOGIN</a></li>
+			<li><a href="{{url_for('signup')}}">SIGNUP</a></li>
+		  </ul>
+		</div>
+	{% endif %}
+	{% if j==True %}
+
+		<div id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ session["username"]}}
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ url_for('profile', username =session['username']) }}">Profile</a></li>
+            <li><a href="{{ url_for('upload_file') }}">Upload an Image</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li> 
+          </ul>
+        </li>
+      </ul>
+    </div>
+	{% endif %}
+  </div>
+
+</nav>
+<br>
+<h1 class="titles">About Us</h1>
+<p>“Pic ‘n choose”  is a very modern and user friendly platform aimed to help people find photographs at a reasonable price while also helping a charity of their choice. It also aims to help professional and amateur photographers sell their work while also doing good for the world. Users can simply upload the image they want to sell, set the price and pick the percentage that goes to charity. Then our image recognition feature will help produce tags to help other users find the image easily and quickly.</p>
+<h1 class="titles">For More Information...</h1>
+<p>You can contact us by:</p>
+<img src="/static/img/email2.png">
+<p>picnchoose@gmail.com</p>
+<img src="/static/img/phone2.png">
+<p>02-123-4567</p>
 </body>
 </html>

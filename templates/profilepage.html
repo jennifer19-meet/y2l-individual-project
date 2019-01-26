@@ -2,16 +2,53 @@
 <html>
 <head>
 	<title>{{ user.username }}</title>
-	<link rel="stylesheet" type="text/css" href="static/style.css">
+	<link rel="stylesheet" type="text/css" href="/static/charity.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<h1>{{ user.username }}</h1>
-<p>{{ user.email }}</p>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+
+    </div>
+    <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-left">
+        <li><a href="{{url_for('home_page')}}">HOME</a></li>
+        <li><a href="{{url_for('all_charities')}}">CHARITIES</a></li>
+        <li><a href="{{url_for('about')}}">ABOUT</a></li>
+      </ul>
+    </div>
+    <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ session["username"]}}
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ url_for('profile', username =session['username']) }}">Profile</a></li>
+            <li><a href="{{ url_for('upload_file') }}">Upload an Image</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li> 
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <br>
-<p>{{ user.password }}</p>
+<img src="/static/profile_pic/{{ user.profile_pic }}" width="250" height="250" id="image1">
+<h1 class="profile_name">{{ user.username }}</h1>
+<p class="profile_email">email: {{ user.email }}</p>
 <br>
-<p>{{ user.followers }}</p>
-<br>
-<p>{{ user.following }}</p>
+{% for a in pics %}
+	<a href="{{ url_for('clicked_img', pic = a.pic)}}"><img src="/static/user_images/{{ a.pic }}" width="300" height="300" class="user_pics"></a>
+{% endfor %}
 </body>
 </html>

@@ -2,14 +2,66 @@
 <html>
 <head>
 	<title>About {{ charity.name }}</title>
-	<link rel="stylesheet" type="text/css" href="static/style.css">
+	<link rel="stylesheet" type="text/css" href="/static/charity.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<h1> {{ charity.name }}</h1>
-<h2>{{ charity.cause }}</h2>
-<p>{{ charity.paragraph }}</p>
-<h1>Contact Information</h1>
-<p>website: <a href="{{ charity.website }}">{{ charity.website }}</a></p>
-<p>email: {{ charity.email }}</p>
+<nav class="navbar navbar-default">
+  <div class="container">
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>                        
+	  </button>
+
+	</div>
+	<div id="myNavbar">
+	  <ul class="nav navbar-nav navbar-left">
+		<li><a href="{{url_for('home_page')}}">HOME</a></li>
+		<li><a href="{{url_for('all_charities')}}">CHARITIES</a></li>
+		<li><a href="{{url_for('about')}}">ABOUT</a></li>
+	  </ul>
+	</div>
+	{% if j == None %}
+		<div class="collapse navbar-collapse" id="myNavbar">
+		  <ul class="nav navbar-nav navbar-right">
+			<li><a href="{{url_for('signin')}}">LOGIN</a></li>
+			<li><a href="{{url_for('signup')}}">SIGNUP</a></li>
+		  </ul>
+		</div>
+	{% endif %}
+	{% if j==True %}
+
+		<div id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ session["username"]}}
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ url_for('profile', username =session['username']) }}">Profile</a></li>
+            <li><a href="{{ url_for('upload_file') }}">Upload an Image</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li> 
+          </ul>
+        </li>
+      </ul>
+    </div>
+	{% endif %}
+  </div>
+
+</nav>
+<br>
+<img src="/static/charity_pic/{{ charity.pic }}" width="350" height="350">
+<br>
+<h1 class ="name"> {{ charity.name }}</h1>
+<h2 class="cause">Our cause: {{ charity.cause }}</h2>
+<p id="paragraph">{{ charity.paragraph }}</p>
+<h1 id="contact">Contact Information</h1>
+<p id="website">website: <a href="{{ charity.website }}">{{ charity.website }}</a></p>
+<p id="email">email: {{ charity.email }}</p>
 </body>
 </html>

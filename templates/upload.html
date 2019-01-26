@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Charities</title>
-	<link rel="stylesheet" type="text/css" href="/static/charity.css">
+	<title>Upload a Photo</title>
+	<link rel="stylesheet" type="text/css" href="/static/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -27,17 +27,7 @@
         <li><a href="{{url_for('about')}}">ABOUT</a></li>
       </ul>
     </div>
-    {% if j == None %}
-		<div class="collapse navbar-collapse" id="myNavbar">
-		  <ul class="nav navbar-nav navbar-right">
-			<li><a href="{{url_for('signin')}}">LOGIN</a></li>
-			<li><a href="{{url_for('signup')}}">SIGNUP</a></li>
-		  </ul>
-		</div>
-	{% endif %}
-	{% if j==True %}
-
-		<div id="myNavbar">
+    <div id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ session["username"]}}
@@ -50,17 +40,31 @@
         </li>
       </ul>
     </div>
-	{% endif %}
   </div>
-
 </nav>
 <br>
-{% for charity in charities %}
-	<img src="/static/charity_pic/{{ charity.pic }}" height="350" width="350">
-	<h2 class="name"> <a href="charities/{{ charity.id }}">{{ charity.name }}</a></h2>
-	<h5 class="cause">{{ charity.cause }}</h5>
-	<p class="short_intro">{{ charity.short_intro }}</p>
-{% endfor %}
-
+<h1>Upload new File</h1>
+<form method="post" enctype=multipart/form-data>
+<p><input type=file name=file>
+<br>
+<br>
+<br>
+keywords to help users find the image: <input type="text" name="keywords">
+<br>
+<p>please place commas between each keyword</p>
+<br>
+<br>
+Price: <input type="text" name="price">
+<br>
+Currency: <input type="radio" name="currency" value="dollar">Dollar
+<input type="radio" name="currency" value="shekel">Shekel
+<input type="radio" name="currency" value="euro">Euro
+<br>
+Percentage of the price that goes to charity: <input type="text" name="percentage">
+<input type=submit value=Upload>
+</form>
+{% if failed == True %}
+	<h4> You can only upload images</h4>
+{% endif %}
 </body>
 </html>

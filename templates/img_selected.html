@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Sign Up Now</title>
-	<link rel="stylesheet" type="text/css" href="/static/signup_style.css">
+	<title>Selected Image</title>
+	<link rel="stylesheet" type="text/css" href="/static/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body background="/static/img/signup4.jpg">
+<body>
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
@@ -26,35 +27,30 @@
         <li><a href="{{url_for('about')}}">ABOUT</a></li>
       </ul>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
+    <div id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{url_for('signin')}}">LOGIN</a></li>
-        <li><a href="{{url_for('signup')}}">SIGNUP</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ session["username"]}}
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ url_for('profile', username =session['username']) }}">Profile</a></li>
+            <li><a href="{{ url_for('upload_file') }}">Upload an Image</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li> 
+          </ul>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 <br>
-<div class="form_div">
-<div class="j">
-<h1 id="login_title">Sign Up</h1>
-<p>Already have an account? <a href="{{ url_for('signin') }}" >Log in here</a></p>
-<form action="{{url_for('signup')}}" method = "POST" enctype=multipart/form-data >
-	<input type="text" name="username" placeholder="Username">
-	<br>
-	<input type="email" name="email" placeholder="Email">
-	<br>
-	<input type="password" name="password" placeholder="Password">
-	<br>	
-	Profile Picture: <input type=file name=file >
-	<br>
-	<input type="submit" value="Submit" class="btn">
-</form>
+<img src="/static/user_images/{{ photo.pic }}">
 
-{% if failed == True %}
-	<h4> You can only upload images</h4>
-{% endif %}
-</div>
-</div>
+<h5>Posted by: <a href="{{ url_for('profile', username = user.username)}}">{{ user.username }}</p></a></h5>
+<p>Keywords: {{ photo.keywords }}</p>
+<p>Price: {{ photo.price }} {{ photo.currency }} </p>
+<p>{{ photo.percentage }} % of the price goes to charity</p>
+<form action="{{url_for('buy_now', pic = photo.pic)}}">
+  <input type="submit" name="Buy">
+</form>
 </body>
 </html>
