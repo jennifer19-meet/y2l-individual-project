@@ -45,10 +45,30 @@
 <br>
 
 <h1>Search Results</h1>
-{% for search in searches%}
-<p>search</p>
+<br>
+{% if user_search == True %}
+  {% for search in results%}
+
+    <p>{{ search.username }}</p>
 
 
-{% endfor%}
+  {% endfor%}
+  {% if a == True %}
+    <P> There are no users with that username</P>
+  {% endif %}
+{% endif %}
+
+
+{% if user_search == False %}
+  {% for search in results%}
+
+    <img src="/static/user_images/{{ search.pic }}">
+
+
+  {% endfor%}
+  {% if a == True %}
+    <P> There are no images with that keyword/tag</P>
+  {% endif %}
+{% endif %}
 </body>
 </html>

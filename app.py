@@ -9,10 +9,15 @@ from werkzeug.utils import secure_filename
 import os
 import json, requests
 import database
+from PIL import Image
+from clarifai.rest import ClarifaiApp
+from clarifai.errors import ApiError
 
 app = Flask(__name__)
 # sess = Session()
 ######################NOT LOGGED IN###################
+app1 = ClarifaiApp(api_key='737ed43ee3e54455a067f36e36cd56d9')
+model = app1.public_models.general_model
 
 
 UPLOAD_FOLDER = 'static/user_images'
@@ -45,10 +50,31 @@ def upload_file():
 			if file.filename == '':
 				return redirect(request.url)
 			if file and allowed_file(file.filename):
-				keywords = request.form["keywords"]
 				a= database.get_last_id()
+				response = model.predict_by_filename('/home/meet/Desktop/labs/y2l-apis-continued/frame0.jpg')
+				f = response["outputs"]
+				for frame in f:
+					for concept in frame["data"]["concepts"]:
+						database.add_keyword((' %s ' % (concept["name"])), a.id+1)
+	
+				keywords1 = request.form["keywords1"]
+				if keywords1 == '':
+					d = None
+				else:
+					database.add_keyword(keywords1, a.id+1)
+				keywords2 = request.form["keywords2"]
+				if keywords2 == "":
+					b = None
+				else:
+					database.add_keyword(keywords2, a.id+1)
+				keywords3 = request.form["keywords3"]
+				if keywords3 == '':
+					c = None
+				else:
+					database.add_keyword(keywords3, a.id+1)
+				
 				b = file.filename
-				print(a.id)
+				# print(a.id)
 				f = str((int(a.id) +1))+"." + b.rsplit('.', 1)[1].lower()
 				target = os.path.join(app.config['UPLOAD_FOLDER'], f)
 				file.save(target)
@@ -58,7 +84,7 @@ def upload_file():
 				price = request.form["price"]
 				currency = request.form["currency"]
 				percentage = request.form["percentage"]
-				database.add_photo(f, keywords, session['id'],y, price,currency,percentage)
+				database.add_photo(f, session['id'],y, price,currency,percentage)
 				return redirect(url_for('home_page'))
 			if file and not allowed_file(file.filename):
 				failed = True
@@ -78,6 +104,7 @@ def upload_file():
 def home_page():
 	list1 = []
 	if "logged_in" in session and session['logged_in']:
+		print(session["id"])
 		photos = database.get_all_photos()
 		print(photos)
 		random.shuffle(photos)
@@ -121,16 +148,7 @@ def signup():
 				database.create_user(username, email, password,f)
 				person = database.get_user(username)
 				d = database.get_photos_by_user_id(person.id)
-				session['logged_in'] = True
-				session['iiid'] = person.id
-				session['username'] = person.username
-				session['password'] = person.password
-				session['email'] = person.email
-				session['followers'] = person.followers
-				session['following'] = person.following
-				session['profile_pic'] = person.profile_pic
-				for i in d :
-					session['pics']= b.pic
+				
 	# ###########################IMPORTANT Q: how to create a new name for session['pics(1/2/3/4/5/6/7/....)'] everytime it goes through the for loop
 				return redirect(url_for('home_page'))
 			if file and not allowed_file(file.filename):
@@ -275,19 +293,25 @@ def results():
 	if "logged_in" in session and session['logged_in']:
 		if request.method =='POST':	 
 			a = None
+			user_search = None
 			results = []
 			if request.form['search_type'] == "users":
 				results = database.get_users(request.form['search'])
-
+				user_search = True
 				if results == None:
 					a = True
-				return render_template("searchpage.html",results=results, a=a)
+				return render_template("searchpage.html",results=results, a=a,user_search=user_search)
 		 
 			if request.form['search_type'] == "images":
-				results = database.get_photo_by_keywords(request.form['search'])
+				path = database.get_photo_id_by_keywords(request.form['search'])
+				print(path)
+				for i in path:
+					results.append (database.get_photo_by_id(i.pic_id))
+
+				user_search = False
 				if results == None:
 					a = True
-				return render_template("searchpage.html",results=results, a=a)
+				return render_template("searchpage.html",results=results, a=a,user_search=user_search)
 			else:
 				return redirect(url_for("home_page"))
 		else:
@@ -306,11 +330,13 @@ def about():
 
 @app.route('/image/<string:pic>')
 def clicked_img(pic):
+
 	photo = database.get_photo_by_name(pic)
 	user = database.get_user_by_id(photo.user_id)
 	return render_template("img_selected.html", photo = photo, user = user)
 @app.route("/image/<string:pic>/buy_now")
 def buy_now(pic):
+
 	charities  = database.get_all_charities()
 	photo = database.get_photo_by_name(pic)
 	user = database.get_user_by_id(photo.user_id)

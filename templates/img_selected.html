@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Selected Image</title>
-	<link rel="stylesheet" type="text/css" href="/static/style.css">
+	<link rel="stylesheet" type="text/css" href="/static/img.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -43,14 +43,21 @@
   </div>
 </nav>
 <br>
-<img src="/static/user_images/{{ photo.pic }}">
-
+<img src="/static/user_images/{{ photo.pic }}" >
+<div class="c111">
 <h5>Posted by: <a href="{{ url_for('profile', username = user.username)}}">{{ user.username }}</p></a></h5>
-<p>Keywords: {{ photo.keywords }}</p>
+<p>Keywords:</p>
+{% for i in photo.keyword %}
+
+<p> {{ i }}</p>
+{% endfor %}
 <p>Price: {{ photo.price }} {{ photo.currency }} </p>
 <p>{{ photo.percentage }} % of the price goes to charity</p>
 <form action="{{url_for('buy_now', pic = photo.pic)}}">
-  <input type="submit" name="Buy">
+  <input type="submit" name="buy" value="buy">
+
+
 </form>
+</div>
 </body>
 </html>

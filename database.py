@@ -21,7 +21,7 @@ def create_user(username, email, password,profile_pic):
 		)
 	session.add(new_user)
 	session.commit()
-create_user("j", "j.com","jk","hi")
+# create_user("j", "j.com","jk","hi")
 def create_charity(name, cause, email, website,pic,short_intro, paragraph):
 	new_charity = Charity(
 		name = name,
@@ -37,10 +37,9 @@ def create_charity(name, cause, email, website,pic,short_intro, paragraph):
 
 create_charity("save the pandas","animals", "sunflowermaster234@yahoo.com", "www.pandas.com", "hi","here at san diagos very own save the pandas we aim to increase there natural diversity in the wild and make them healthy again","PPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAAAAAAAAAAAAARRRRRRRRRRRRRRRRRRRRRRRRRRRAAAAAAAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGRRRRRRRRRRRRRRRRRRRRRRRAAAAAAAAAAAAAAAAAAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPHHHHHHHHHHHHHHHHHHHHHHH")
 
-def add_photo(pic,keywords, user_id,user_username, price,currency,percentage):
+def add_photo(pic, user_id,user_username, price,currency,percentage):
 	new_photo = Photos(
 		pic = pic,
-		keywords = keywords,
 		user_id = user_id,
 		user_username=user_username, 
 		price = price,
@@ -49,8 +48,15 @@ def add_photo(pic,keywords, user_id,user_username, price,currency,percentage):
 		)
 	session.add(new_photo)
 	session.commit()
-add_photo("lantern","animal,cute,china", 1, "j", 10, "dollar",25)
-
+# add_photo("lantern", 1, "j", 10, "dollar",25)
+def add_keyword(keyword, pic_id):
+	new_keyword = Keywords(
+		keyword = keyword,
+		pic_id = pic_id
+		)
+	session.add(new_keyword)
+	session.commit()
+# add_keyword("panda",1)
 ###########################UPDATE###################################
 def follow_now(username):
 	followed  = session.query(User).filter_by(username = username).first()
@@ -102,12 +108,16 @@ def get_photos_by_user_id(user_id):
 	photos = session.query(Photos).filter_by(user_id=user_id).all()
 	return photos
 
-def get_photo_by_keywords(keywords):
-	photos = session.query(Photos).filter_by(keywords=keywords).all()
-	return photos
+def get_photo_id_by_keywords(keyword):
+	photo_id = session.query(Keywords).filter_by(keyword=keyword).all()
+	return photo_id
 
 def get_photo_by_name(pic):
 	photo = session.query(Photos).filter_by(pic=pic).first()
+	return photo
+
+def get_photo_by_id(id):
+	photo = session.query(Photos).filter_by(id=id).first()
 	return photo
 
 def get_all_photos():

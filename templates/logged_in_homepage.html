@@ -55,24 +55,33 @@
   <form action="{{url_for('results')}}" method="POST">
     <div class="input-group">
 
-    <input type="radio" name="search_type" value="users"> Users
-    <input type="radio" name="search_type" value="images"> Images
-    <br>
+    
+   
       <input type="text" name="search" class="form-control" size="20">
-      <br>
+    
       <div class="input-group-btn">
         <input type="submit" name="search_submit" value="Search" class="btn btn-danger" >
       </div>
     </div>
     <br>
+    <input type="radio" name="search_type" value="users"> Users
+    <input type="radio" name="search_type" value="images"> Images
   </form>
 </div>
 <br>
+
+<div class="container-fluid bg-3 text-center">
+  <div id="hi">
+    <h1 >Photos</h1>
+</div>
+</div>
+<br>
+
+
+
 {% for i in photos %}
   <a href="{{url_for('clicked_img', pic = i.pic)}}"><img src="/static/user_images/{{ i.pic }}" width="300" height="300" class="user_pics"></a>
 
-  <p class="user_sell">Sold by: {{i.user_username}}</p>
-  <p class="user_price">Price: {{ i.price }} {{ i.currency }}</p>
 {% endfor %}
 </body>
 </html>

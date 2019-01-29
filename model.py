@@ -11,11 +11,20 @@ Base = declarative_base()
 
 # Write your classes here :
 
+class Keywords(Base):
+	__tablename__ = "keywords"
+	id =  Column(Integer, primary_key= True)
+	keyword = Column(String)
+	pic_id = Column(Integer, ForeignKey('photos.id'))
+	pics = relationship("Photos", back_populates="keyword")
+	def __repr__(self):
+		return "%s" % self.keyword
+
+
 class Photos(Base):
 	__tablename__ = "photos"
 	id = Column(Integer, primary_key= True)
 	pic = Column(String)
-	keywords = Column(String)
 	name = Column(String)
 	user_id = Column(Integer, ForeignKey('users.id'))
 	user_username = Column(String)
@@ -25,7 +34,8 @@ class Photos(Base):
 	user = relationship("User", back_populates="pics")
 
 	def __repr__(self):
-		return "<Photos(pic='%s')>" % self.pic and "<Photos(keywords='%s'>" % self.keywords
+		return "<Photos(pic='%s')>" % self.pic
+Photos.keyword = relationship("Keywords", back_populates="pics")
 
 # class Follows(Base):
 # 	__tablename__= "follows"

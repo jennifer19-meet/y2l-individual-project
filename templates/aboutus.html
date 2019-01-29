@@ -27,15 +27,7 @@
 		<li><a href="{{url_for('about')}}">ABOUT</a></li>
 	  </ul>
 	</div>
-	{% if j == None %}
-		<div class="collapse navbar-collapse" id="myNavbar">
-		  <ul class="nav navbar-nav navbar-right">
-			<li><a href="{{url_for('signin')}}">LOGIN</a></li>
-			<li><a href="{{url_for('signup')}}">SIGNUP</a></li>
-		  </ul>
-		</div>
-	{% endif %}
-	{% if j==True %}
+
 
 		<div id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
@@ -50,7 +42,7 @@
         </li>
       </ul>
     </div>
-	{% endif %}
+
   </div>
 
 </nav>

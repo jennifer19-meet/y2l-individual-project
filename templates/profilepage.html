@@ -43,12 +43,15 @@
   </div>
 </nav>
 <br>
-<img src="/static/profile_pic/{{ user.profile_pic }}" width="250" height="250" id="image1">
+  <img src="/static/profile_pic/{{ user.profile_pic }}" width="250" height="250" class="img-circle">
+
 <h1 class="profile_name">{{ user.username }}</h1>
 <p class="profile_email">email: {{ user.email }}</p>
 <br>
+<div class="pict">
 {% for a in pics %}
 	<a href="{{ url_for('clicked_img', pic = a.pic)}}"><img src="/static/user_images/{{ a.pic }}" width="300" height="300" class="user_pics"></a>
 {% endfor %}
+</div>
 </body>
 </html>

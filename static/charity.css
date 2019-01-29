@@ -7,6 +7,9 @@ body {
 		line-height: 1.8;
 		color: #f5f6f7;
 	}
+#image1{
+	border-radius: 50%;
+}
 .name{
 	margin-left: 370px;
 	margin-top: -330px;
@@ -23,10 +26,9 @@ body {
 	margin-left: 370px;
 	margin-top: -270px;
 	margin-bottom: 270px;
-	overflow: hidden;
- 	display: -webkit-box;
-	-webkit-line-clamp: 3;
-	-webkit-box-orient: vertical;
+	word-wrap: break-word;
+	width: 900px;
+
 }
 #contact{
 	margin-left: 10px;
@@ -39,11 +41,19 @@ body {
 	margin-left: 370px;
 	margin-top: -270px;
 	margin-bottom: 270px;
-	overflow: hidden;
- 	display: -webkit-box;
-	-webkit-line-clamp: 3;
-	-webkit-box-orient: vertical;
+	word-wrap: break-word;
+	width: 900px;
 }
+#email{
+	margin-left: 10px;
+	margin-top: -90px;
+	margin-bottom: 90px;
+	}
+#website{
+	margin-left: 10px;
+	margin-top: -100px;
+	margin-bottom: 100px;
+	}
 .navbar {
 		padding-top: 15px;
 		padding-bottom: 15px;
@@ -79,7 +89,7 @@ body {
 	margin-bottom: 200px;
 }
 .user_pics{
-	align-self: 
+	border: 7px solid lightgrey; 
 }
 .sellers{
 
