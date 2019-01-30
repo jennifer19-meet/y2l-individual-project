@@ -9,7 +9,6 @@ from werkzeug.utils import secure_filename
 import os
 import json, requests
 import database
-from PIL import Image
 from clarifai.rest import ClarifaiApp
 from clarifai.errors import ApiError
 
