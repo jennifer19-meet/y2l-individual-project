@@ -24,7 +24,7 @@
       <ul class="nav navbar-nav navbar-left">
         <li><a href="{{url_for('home_page')}}">HOME</a></li>
         <li><a href="{{url_for('all_charities')}}">CHARITIES</a></li>
-        <li><a href="{{url_for('about')}}">ABOUT</a></li>
+
       </ul>
     </div>
     <div id="myNavbar">
@@ -44,12 +44,14 @@
 </nav>
 <br>
 
-<h1>Search Results</h1>
+<h1 id="title2">Search Results</h1>
+<br>
+<br>
 <br>
 {% if user_search == True %}
   {% for search in results%}
 
-    <p>{{ search.username }}</p>
+    <p><a href="{{ url_for('profile', username = search.username) }}">{{ search.username }}</a></p>
 
 
   {% endfor%}
@@ -62,7 +64,7 @@
 {% if user_search == False %}
   {% for search in results%}
 
-    <img src="/static/user_images/{{ search.pic }}">
+    <a href="{{ url_for('clicked_img', pic = search.pic) }}"><img src="/static/user_images/{{ search.pic }}"></a>
 
 
   {% endfor%}

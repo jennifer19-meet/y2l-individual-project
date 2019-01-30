@@ -15,9 +15,7 @@ def create_user(username, email, password,profile_pic):
 		username = username,
 		email = email,
 		password = password,
-		profile_pic = profile_pic,
-		followers = 0,
-		following = 0
+		profile_pic = profile_pic
 		)
 	session.add(new_user)
 	session.commit()

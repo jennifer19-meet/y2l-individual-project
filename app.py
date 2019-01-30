@@ -40,6 +40,7 @@ def upload_file():
 	if "logged_in" in session and session['logged_in']:
 		if request.method == 'POST':
 			failed = None
+			list1=[]
 			# check if the post request has the file part
 			if 'file' not in request.files:
 				print('No file part')
@@ -53,29 +54,53 @@ def upload_file():
 				a= database.get_last_id()
 				response = model.predict_by_filename('/home/meet/Desktop/labs/y2l-apis-continued/frame0.jpg')
 				f = response["outputs"]
-				for frame in f:
-					for concept in frame["data"]["concepts"]:
-						database.add_keyword((' %s ' % (concept["name"])), a.id+1)
+				if a ==None:
+					for frame in f:
+						for concept in frame["data"]["concepts"]:
+							list1.append(concept["name"])
+					for i in range (len(list1)):
+							database.add_keyword(list1[i], 1)
+					keywords1 = request.form["keywords1"]
+					if keywords1 == '':
+						d = None
+					else:
+						database.add_keyword(keywords1, 1)
+					keywords2 = request.form["keywords2"]
+					if keywords2 == "":
+						b = None
+					else:
+						database.add_keyword(keywords2, 1)
+					keywords3 = request.form["keywords3"]
+					if keywords3 == '':
+						c = None
+					else:
+						database.add_keyword(keywords3, 1)
+				else:
+					for frame in f:
+						for concept in frame["data"]["concepts"]:
+							database.add_keyword((' %s ' % (concept["name"])), a.id+1)
 	
-				keywords1 = request.form["keywords1"]
-				if keywords1 == '':
-					d = None
-				else:
-					database.add_keyword(keywords1, a.id+1)
-				keywords2 = request.form["keywords2"]
-				if keywords2 == "":
-					b = None
-				else:
-					database.add_keyword(keywords2, a.id+1)
-				keywords3 = request.form["keywords3"]
-				if keywords3 == '':
-					c = None
-				else:
-					database.add_keyword(keywords3, a.id+1)
+					keywords1 = request.form["keywords1"]
+					if keywords1 == '':
+						d = None
+					else:
+						database.add_keyword(keywords1, a.id+1)
+					keywords2 = request.form["keywords2"]
+					if keywords2 == "":
+						b = None
+					else:
+						database.add_keyword(keywords2, a.id+1)
+					keywords3 = request.form["keywords3"]
+					if keywords3 == '':
+						c = None
+					else:
+						database.add_keyword(keywords3, a.id+1)
 				
 				b = file.filename
-				# print(a.id)
-				f = str((int(a.id) +1))+"." + b.rsplit('.', 1)[1].lower()
+				if a ==None:
+					f= str(1)+"."+b.rsplit('.', 1)[1].lower()
+				else:
+					f = str((int(a.id) +1))+"." + b.rsplit('.', 1)[1].lower()
 				target = os.path.join(app.config['UPLOAD_FOLDER'], f)
 				file.save(target)
 				print(session['id'])
@@ -141,7 +166,10 @@ def signup():
 			if file and allowed_file(file.filename):
 				a= database.get_last_user_id()
 				b = file.filename
-				f = str((int(a.id) +1))+"." + b.rsplit('.', 1)[1].lower()
+				if a ==None:
+					f= str(1)+"."+b.rsplit('.', 1)[1].lower()
+				else:
+					f = str((int(a.id) +1))+"." + b.rsplit('.', 1)[1].lower()
 				target = os.path.join(app.config['UPLOAD_FOLDER_2'], f)
 				file.save(target)
 				
@@ -252,8 +280,10 @@ def new_charity():
 		if file and allowed_file(file.filename):
 			a = database.get_last_charity_id()
 			b = file.filename
-			print(a)
-			f = str((int(a.id) +1))+"." + b.rsplit('.', 1)[1].lower()
+			if a ==None:
+					f= str(1)+"."+b.rsplit('.', 1)[1].lower()
+			else:
+				f = str((int(a.id) +1))+"." + b.rsplit('.', 1)[1].lower()
 			target = os.path.join(app.config['UPLOAD_FOLDER_3'], f)
 			file.save(target)
 			name = request.form['name']

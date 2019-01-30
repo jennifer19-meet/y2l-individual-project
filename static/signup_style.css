@@ -11,6 +11,17 @@ body, html {
   text-align: center;
 }
 
+.j2 {
+  position: absolute;
+  right :0;
+  padding-left: 15px;
+  padding-right: 15px;
+  max-width: 350px;
+  margin-right: 500px;
+  background-color: white;
+  border-radius: 25px;
+}
+
 .j {
   position: absolute;
   right :0;
@@ -24,7 +35,7 @@ body, html {
   padding-top: 30px;
 }
 /* Full-width input fields */
-  input[type=text], input[type=password], input[type=email] {
+  input[type=text], input[type=password], input[type=email], input[type=radio],input[type=file] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -32,7 +43,7 @@ body, html {
   background: #f1f1f1;
 }
 
-input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=radio]:focus,input[type=file]:focus {
   background-color: #ddd;
   outline: none;
 }
