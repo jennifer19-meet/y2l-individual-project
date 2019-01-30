@@ -19,7 +19,7 @@ app = Flask(__name__)
 app1 = ClarifaiApp(api_key='737ed43ee3e54455a067f36e36cd56d9')
 model = app1.public_models.general_model
 
-
+print(PIL.VERSION)
 UPLOAD_FOLDER = 'static/user_images'
 UPLOAD_FOLDER_2 = 'static/profile_pic'
 UPLOAD_FOLDER_3 = 'static/charity_pic'
