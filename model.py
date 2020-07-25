@@ -37,17 +37,15 @@ class Photos(Base):
 		return "<Photos(pic='%s')>" % self.pic
 Photos.keyword = relationship("Keywords", back_populates="pics")
 
-# class Follows(Base):
-# 	__tablename__= "follows"
-# 	names = Column(String, primary_key=True)
-# 	"bob" follows "alice"
-# 	"bob-alice"
-# 	followed = Column(Integer, ForeignKey('users.id'))
-# 	followed_by = Column(Integer, ForeignKey('users.id'))
-# 	followed1 = relationship("User", foreign_keys ="Follows.followed")
-# 	followed_by1 = relationship("User", foreign_keys ="Follows.followed_by")
-# 	def __repr__(self):
-# 		return "<Follows(followed='%i')>" % self.followed and "<Folllows(followed_by='%i')>" % self.followed_by
+class Follows(Base):
+	__tablename__= "follows"
+	id = Column(Integer, primary_key=True)
+	followed = Column(Integer)
+	followed_by = Column(Integer)
+	# followed1 = relationship("User", foreign_keys ="Follows.followed")
+	# followed_by1 = relationship("User", foreign_keys ="Follows.followed_by")
+	def __repr__(self):
+		return "<Follows(followed='%i')>" % self.followed and "<Folllows(followed_by='%i')>" % self.followed_by
 
 class User(Base):
 	__tablename__ ="users"
@@ -72,6 +70,7 @@ class Charity(Base):
 	cause = Column(String)
 	email = Column(String)
 	website = Column (String)
+	age = Column (Integer)
 	pic = Column (String)
 	short_intro = Column(String)
 	paragraph = Column(String)
