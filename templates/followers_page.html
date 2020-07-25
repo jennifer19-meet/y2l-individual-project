@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Homepage</title>
-
-  <link rel="stylesheet" type="text/css" href="/static/style.css">
-  <meta http-equiv="imagetoolbar" content="no" />
+	<title>{{ user.username }}'s followers</title>
+	<link rel="stylesheet" type="text/css" href="/static/charity.css">
+    <meta http-equiv="imagetoolbar" content="no" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 </head>
-<body oncontextmenu="return false;">
+<body>
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
@@ -46,43 +43,29 @@
     </div>
   </div>
 </nav>
+<br>
+<h1 class="center_me" style="font-size: 50px;">{{ user.username }}'s followers</h1>
+<br><br><br>
+{% for i in range (followers|length) %}
+<div class="centering">
+<img src="/static/profile_pic/{{ followers[i].profile_pic }}" width="150" height="150" class="img-circle">
+<div class="right_side">
+<a href="{{ url_for('profile', username=followers[i].username) }}">{{ followers[i].username }}</a>
+{% if has_photos[i]==True %}
 
-<div class="container-fluid bg-1 text-center">
-  <h1 class="margin">Pic 'N Choose</h1>
-  <img src="/static/img/logo2.jpg">
-  <br>
-  <br>
-  <br>
-  <form action="{{url_for('results')}}" method="POST">
-    <div class="input-group">
+<p>Number of photos for sale by this user: {{ number_of_photos[i] }}</p>
+<p>Price range: ${{ least_p[i] }} - ${{ most_p[i] }}</p>
 
-    
-   
-      <input type="text" name="search" class="form-control" size="20">
-    
-      <div class="input-group-btn">
-        <input type="submit" name="search_submit" value="Search" class="btn btn-danger" >
-      </div>
-    </div>
-    <br>
-    <input type="radio" name="search_type" value="users" required> Users
-    <input type="radio" name="search_type" value="images" required> Images
-  </form>
+{% endif %}
+{% if has_photos[i]==False %}
+
+<p>This user has no images for sale!</p>
+
+{% endif %}
 </div>
 <br>
-
-<div class="container-fluid bg-3 text-center">
-  <div id="hi">
-    <h1 >Photos</h1>
 </div>
-</div>
-<br>
-
-
-
-{% for i in photos %}
-  <a href="{{url_for('clicked_img', pic = i.pic)}}"><img src="/static/user_images/{{ i.pic }}" width="300" height="300" class="user_pics"></a>
-
 {% endfor %}
+
 </body>
 </html>

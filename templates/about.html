@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Homepage</title>
-
-  <link rel="stylesheet" type="text/css" href="/static/style.css">
-  <meta http-equiv="imagetoolbar" content="no" />
+	<title>About us!</title>
+	<link rel="stylesheet" type="text/css" href="/static/charity.css">
+ 	<meta http-equiv="imagetoolbar" content="no" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 </head>
 <body oncontextmenu="return false;">
 <nav class="navbar navbar-default">
@@ -47,42 +44,15 @@
   </div>
 </nav>
 
-<div class="container-fluid bg-1 text-center">
-  <h1 class="margin">Pic 'N Choose</h1>
-  <img src="/static/img/logo2.jpg">
-  <br>
-  <br>
-  <br>
-  <form action="{{url_for('results')}}" method="POST">
-    <div class="input-group">
-
-    
-   
-      <input type="text" name="search" class="form-control" size="20">
-    
-      <div class="input-group-btn">
-        <input type="submit" name="search_submit" value="Search" class="btn btn-danger" >
-      </div>
-    </div>
-    <br>
-    <input type="radio" name="search_type" value="users" required> Users
-    <input type="radio" name="search_type" value="images" required> Images
-  </form>
-</div>
-<br>
-
 <div class="container-fluid bg-3 text-center">
-  <div id="hi">
-    <h1 >Photos</h1>
-</div>
+<p style="font-size: 50px;">ABOUT US</p>
 </div>
 <br>
-
-
-
-{% for i in photos %}
-  <a href="{{url_for('clicked_img', pic = i.pic)}}"><img src="/static/user_images/{{ i.pic }}" width="300" height="300" class="user_pics"></a>
-
-{% endfor %}
+<br>
+<div style="text-align: center; margin-left: 200px;" >
+<p style="font-size: 30px; max-width: 1000px;">Pic n Choose was founded in 2019 as part of a project that has the potential to impact the surrounding communtiy. We wanted to create a website where anyone, professional or not, could upload and sell the photos they took. This is meant to help people who might need extra cash but it's also meant to provide aspiring and professional photographers with a platform that could help them expand their business. We also wanted to involve helping needy communities and good organizations which is why we require that every image sold has a percentage of its price donated to a charity of the buyer choice.</p>
+</div>
+<br>
+<img src="/static/img/j.jpeg" style="margin-left: 200px;">
 </body>
 </html>

@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Selected Image</title>
+  <meta http-equiv="imagetoolbar" content="no" />
 	<link rel="stylesheet" type="text/css" href="/static/img.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -9,7 +10,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body oncontextmenu="return false;">
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
@@ -24,7 +25,7 @@
       <ul class="nav navbar-nav navbar-left">
         <li><a href="{{url_for('home_page')}}">HOME</a></li>
         <li><a href="{{url_for('all_charities')}}">CHARITIES</a></li>
-
+        <li><a href="{{url_for('about')}}">ABOUT US</a></li>
       </ul>
     </div>
     <div id="myNavbar">
@@ -43,21 +44,53 @@
   </div>
 </nav>
 <br>
-<img src="/static/user_images/{{ photo.pic }}" >
+{% if buy == False %}
 <div class="c111">
-<h5>Posted by: <a href="{{ url_for('profile', username = user.username)}}">{{ user.username }}</p></a></h5>
-<p>Keywords:</p>
+<p>Sold by: <a href="{{ url_for('profile', username = user.username)}}">{{ user.username }}</p></a>
+<br>
+<span class="same_line">Keywords:</span>
 {% for i in photo.keyword %}
-
-<p> {{ i }}</p>
+<button class="same_line" > <a href="{{ url_for('similar_keys', keyword = i)}}">{{ i }}</a></button>
 {% endfor %}
+<br>
+<br>
 <p>Price: {{ photo.price }} {{ photo.currency }} </p>
-<p>{{ photo.percentage }} % of the price goes to charity</p>
-<form action="{{url_for('buy_now', pic = photo.pic)}}">
+<p>{{ photo.percentage }}% of the price goes to charity ({{ percent_price }} {{ photo.currency }})</p>
+<form action="{{ url_for('clicked_img', pic = photo.pic, buy = True) }}" method="POST">
   <input type="submit" name="buy" value="buy">
 
 
 </form>
 </div>
+<br>
+<img src="/static/user_images/{{ photo.pic }}" height="500px" class="user_pic">
+{% endif %}
+{% if buy == True %}
+
+
+<div class="c222">
+
+<p >Seller: <a href="{{ url_for('profile', username = user.username)}}">{{ user.username }}</a></p>
+<p >Price: {{ photo.price }} {{ photo.currency }} </p>
+<p>{{ photo.percentage }} % of the price goes to charity ({{ percent_price }} {{ photo.currency }})</p>
+
+<form>
+     <fieldset>
+          <legend>Select a Charity</legend>
+          <p>
+             <label>Charities</label>
+             <select id = "myList">
+             {% for i in charities %}
+               <option >{{ i.name }}</option>
+              {% endfor %}
+             </select>
+          </p>
+       </fieldset>
+</form>
+<p >To get the image please press on it</p>
+</div>
+
+<a href="/static/user_images/{{ photo.pic }}" download="photo" ><img src="/static/user_images/{{ photo.pic }}" height="500px" class="user_pic_2" ></a>
+{% endif %}
 </body>
 </html>

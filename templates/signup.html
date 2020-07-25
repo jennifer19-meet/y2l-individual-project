@@ -3,12 +3,13 @@
 <head>
 	<title>Sign Up Now</title>
 	<link rel="stylesheet" type="text/css" href="/static/signup_style.css">
+  <meta http-equiv="imagetoolbar" content="no" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body background="/static/img/signup4.jpg">
+<body background="/static/img/signup4.jpg" oncontextmenu="return false;">
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
@@ -23,7 +24,7 @@
       <ul class="nav navbar-nav navbar-left">
         <li><a href="{{url_for('home_page')}}">HOME</a></li>
         <li><a href="{{url_for('all_charities')}}">CHARITIES</a></li>
-
+        <li><a href="{{url_for('about')}}">ABOUT US</a></li>
       </ul>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -40,19 +41,19 @@
 <h1 id="login_title">Sign Up</h1>
 <p>Already have an account? <a href="{{ url_for('signin') }}" >Log in here</a></p>
 <form action="{{url_for('signup')}}" method = "POST" enctype=multipart/form-data >
-	<input type="text" name="username" placeholder="Username">
+	<input type="text" name="username" placeholder="Username" required>
 	<br>
-	<input type="email" name="email" placeholder="Email">
+	<input type="email" name="email" placeholder="Email" required>
 	<br>
-	<input type="password" name="password" placeholder="Password">
+	<input type="password" name="password" placeholder="Password" required>
 	<br>	
-	Profile Picture: <input type=file name=file >
+	Profile Picture: <input type=file name=file required>
 	<br>
 	<input type="submit" value="Submit" class="btn">
 </form>
 
 {% if failed == True %}
-	<h4> You can only upload images</h4>
+	<h4> You can only upload png, jpg, jpeg and gif files</h4>
 {% endif %}
 </div>
 </div>

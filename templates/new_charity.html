@@ -9,7 +9,10 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body background="/static/img/volunteer-2055010_640.jpg" style="background-repeat: no-repeat;height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;">
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
@@ -24,7 +27,7 @@
       <ul class="nav navbar-nav navbar-left">
         <li><a href="{{url_for('home_page')}}">HOME</a></li>
         <li><a href="{{url_for('all_charities')}}">CHARITIES</a></li>
-
+        <li><a href="{{url_for('about')}}">ABOUT US</a></li>
       </ul>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -36,24 +39,35 @@
   </div>
 </nav>
 <br>
+<div id="background">
 <h1>Add your Charity</h1>
 <br>
+
 <form action="{{url_for('new_charity')}}" method = "POST" enctype=multipart/form-data>
-	<input type="text" name="name" placeholder="Name">
+	<input type="text" name="name" placeholder="Name" required>
 	<br>
-	<input type="text" name="cause" placeholder="Cause">
+	<input type="text" name="cause" placeholder="Cause" required>
 	<br>
-	<input type="text" name="email" placeholder="Email">
+	<input type="email" name="email" placeholder="Email" required>
 	<br>
-	<input type="text" name="website" placeholder="Website">
+	<input type="website" name="website" placeholder="Website" required>
 	<br>
-	image: <input type="file" name="file">
+  <input type="number" name="age" placeholder="Year founded" min="1500" max="2020" required>
+  <br>
+	Image: <input type="file" name="file" required>
 	<br>
-	informataion about the charity:<input type="text" name="short_intro">
+  Short intro for the charity:
+	<textarea name="short_intro" rows = "3" cols = "80" required></textarea>
 	<br>
-	A paragraph about the charity: <input type="text" name="paragraph">
+  <br>
+	A paragraph about the charity: <textarea name="paragraph" rows = "6" cols = "80" required></textarea>
 	<br>
-	<input type="submit" value="Submit">
+  <br>
+	<input type="submit" value="Submit" id="btn3">
 </form>
+{% if failed == True %}
+<h4>You can only upload png, jpg, jpeg and gif files</h4>
+{% endif %}
+</div>
 </body>
 </html>
