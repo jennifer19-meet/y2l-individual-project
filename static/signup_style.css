@@ -1,6 +1,12 @@
 body, html {
   height: 100%;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+.spaces{
+  text-align: center;
 }
 
 * {
@@ -26,7 +32,7 @@ body, html {
   position: absolute;
   right :0;
   margin: 20px;
-  max-width: 350px;
+  max-width: 300px;
   padding: 16px;
   background-color: white;
   border-radius: 25px;
@@ -35,7 +41,7 @@ body, html {
   padding-top: 30px;
 }
 /* Full-width input fields */
-  input[type=text], input[type=password], input[type=email], input[type=radio],input[type=file] {
+  input[type=text], input[type=password], input[type=email],input[type=file] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -92,3 +98,5 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, inp
 .topnav .search-container {
   float: right;
 }
+
+

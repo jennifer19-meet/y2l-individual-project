@@ -61,14 +61,62 @@ p {font-size: 16px;}
 }
 #hi{
 	text-align: center;
-
+}
+.right_side{
+	position: absolute;
+	margin-left:200px;
+	margin-top:-120px;
+    margin-bottom: 20px
+	font-size:20px;
+}
+.centering{
+    margin-left: 450px;
 }
 img{
 	border: 4px solid black; 
 	margin-top: 10px;
 	margin-left: 15px;	
 	}
-	#title2{
-		text-align: center;
-		font-weight: bold;
+#title2{
+	text-align: center;
+	font-weight: bold;
 	}
+#background{
+  position: absolute;
+  right :0;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 20px;
+  max-width: 350px;
+  margin-right: 500px;
+  background: rgba(255, 255, 255, 0.65); 
+  border-radius: 25px;
+  margin-bottom: 30px;
+}
+input[type=text], input[type=number], input[type=email],input[type=website], input[type=file], textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input[type=website]:focus,input[type=file]:focus, textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+
+#btn3 {
+  background-color: #086E87;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+#btn3:hover {
+  opacity: 1;
+}
